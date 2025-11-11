@@ -70,109 +70,18 @@ Our experiments are designed to validate ReACT's performance, efficiency, contro
 ## 🚀 Code Usage Guide
 
 ### Environment Setup
-This project is implemented in Python and relies on the PyTorch framework. We recommend using Anaconda or Miniconda to create an isolated environment.
-
-```bash
-# Create and activate a conda environment
-conda create -n react_merging python=3.9
-conda activate react_merging
-
-# Install PyTorch (choose the command corresponding to your CUDA version)
-# For example, for CUDA 11.8
-conda install pytorch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 pytorch-cuda=11.8 -c pytorch -c nvidia
-
-# Install other dependencies
-pip install -r requirements.txt
-```
-Example `requirements.txt` (may need further refinement based on actual code):
-```
-numpy
-scipy
-scikit-learn
-tqdm
-einops
-transformers
-# Other libraries for image processing or dataset loading might be needed, e.g.:
-# opencv-python
-# pillow
-```
+**Coming Soon.**
 
 ### Repository Structure
-The main directories and file functionalities of this GitHub repository are as follows:
-- `src/`: Contains the implementation of ReACT's core algorithms, including representation extraction, matrix computations, and the closed-form solution derivation.
-- `scripts/`: Scripts for running experiments and evaluating models.
-- `data/`: Contains dataset processing scripts or information on where to store example data.
-- `models/`: Stores pre-trained models (e.g., CLIP ViT-B/32) and checkpoints for expert models or merged models.
-- `configs/`: YAML configuration files defining model, dataset, hyperparameters, and preference settings.
-- `figures/`: Images and visualization results used in the paper.
-- `utils/`: Auxiliary functions and utility classes.
+**Coming Soon.**
 
 ### Reproducing Experiments
-To reproduce the key experimental results from the paper, follow these steps:
-
-1.  **Download Datasets and Pre-trained Models**: Please refer to the instructions in the `data/` and `models/` directories to download and prepare the necessary datasets (e.g., SUN397, Cars, RESISC45, EuroSAT, SVHN, GTSRB, MNIST, DTD) and the CLIP ViT-B/32 model, along with the expert models for each task.
-2.  **Configure Experiments**: Modify the YAML configuration files in the `configs/` directory to adjust model parameters, dataset paths, preference settings, etc.
-3.  **Run Experiments**: Use the main execution scripts located in the `scripts/` directory. For example, to reproduce the AMPP+Ours results from Table 1, you might run:
-
-    ```bash
-    # Example: Run 8-task merging experiment with AMPP backbone and evaluate different preference settings
-    python scripts/run_main_experiment.py --config configs/ampp_8tasks.yaml --preference_type equal
-    python scripts/run_main_experiment.py --config configs/ampp_8tasks.yaml --preference_type priority
-    python scripts/run_main_experiment.py --config configs/ampp_8tasks.yaml --preference_type one_hot
-    
-    # Example: Run ablation experiment to evaluate regularization strength
-    python scripts/run_ablation_beta.py --config configs/ablation_beta.yaml
-    ```
-    Please adjust the commands based on the specific files and command-line arguments available in the `scripts/` directory.
+**Coming Soon.**
 
 ### Usage Example (Optional)
-Here's a brief code snippet demonstrating how to use ReACT for model merging and inference:
+**Coming Soon.**
 
-```python
-import torch
-from src.react_merging import ReACT
-from models.backbone import load_merged_backbone # Assuming a function to load backbone models
-from models.heads import load_task_heads # Assuming a function to load task heads
-from data.loaders import load_calibration_data # Assuming a function to load calibration data
-
-# 1. Load the pre-merged backbone model and task heads
-merged_backbone = load_merged_backbone('ampp_merged_vitb32')
-task_heads = load_task_heads(['sun397', 'cars', 'resisc45', 'eurosat'])
-
-# 2. Prepare calibration data
-calibration_data = load_calibration_data(['sun397', 'cars', 'resisc45', 'eurosat'], num_samples=100)
-
-# 3. Initialize ReACT (Offline component computation)
-react_module = ReACT(
-    merged_backbone=merged_backbone,
-    task_heads=task_heads,
-    calibration_data=calibration_data,
-    beta=0.1 # Regularization parameter
-)
-
-# 4. Generate correction matrix based on user preference (Online adaptation)
-# For example, prioritize 'sun397' and 'cars'
-preference_vector = {'sun397': 0.4, 'cars': 0.4, 'resisc45': 0.1, 'eurosat': 0.1}
-W_p = react_module.generate_correction_matrix(preference_vector)
-
-# 5. Perform inference using the correction matrix (Online inference)
-test_input = torch.randn(1, 3, 224, 224) # Example input
-task_id = 'sun397' # Target task
-
-with torch.no_grad():
-    # Extract backbone features
-    mtl_representation = merged_backbone(test_input)
-    
-    # Apply ReACT correction
-    corrected_representation = W_p @ mtl_representation.T # Note matrix multiplication
-    corrected_representation = corrected_representation.T
-    
-    # Predict using the task head
-    output = task_heads[task_id](corrected_representation)
-    print(f"Prediction for {task_id}: {output.argmax(dim=-1)}")
-```
-
-## Datasets and Models
+## 📥 Datasets and Models
 
 ### Datasets
 The paper primarily uses the following eight image classification datasets:
@@ -185,15 +94,15 @@ The paper primarily uses the following eight image classification datasets:
 -   **MNIST**: Classic handwritten digits recognition dataset.
 -   **DTD (Describable Textures Dataset)**: Describable Textures Dataset.
 
-These datasets can typically be obtained via PyTorch `torchvision.datasets` or Hugging Face `datasets` library. Specific dataset download and preprocessing scripts will be provided in the `data/` directory.
+**Download instructions and preprocessing scripts will be provided soon.**
 
 ### Pre-trained Models and Checkpoints
 Our work is based on the **CLIP ViT-B/32** visual encoder.
 -   **CLIP ViT-B/32**: The pre-trained model can be obtained through the Hugging Face Transformers library or OpenAI's official repository.
--   **Task Expert Models**: The expert models for the eight tasks used in the paper, fine-tuned from CLIP ViT-B/32, will have their weight files provided with download links or instructions on how to generate them.
--   **Merged Backbone Models**: Checkpoints for pre-merged backbone models (e.g., obtained via AdaMerging or AMPP methods) will also be provided with download links.
+-   **Task Expert Models**: The expert models for the eight tasks used in the paper, fine-tuned from CLIP ViT-B/32.
+-   **Merged Backbone Models**: Pre-merged backbone models (e.g., obtained via AdaMerging or AMPP methods).
 
-Download links and loading instructions will be updated upon the release of the code repository.
+**Download links and loading instructions for all models will be provided soon.**
 
 ## Contributors and Contact
 
