@@ -1,4 +1,4 @@
-# ReACT: From Parameter to Representation: A Closed-Form Approach for Controllable Model Merging
+# ReACT
 source code for paper "From Parameter to Representation: A Closed-Form Approach for Controllable Model Merging" (AAAI2026)
 
 <p align="center">
@@ -10,8 +10,7 @@ source code for paper "From Parameter to Representation: A Closed-Form Approach 
 ## Paper Information
 
 - **Title**: From Parameter to Representation: A Closed-Form Approach for Controllable Model Merging
-- **Conference**: AAAI 2026 (Accepted)
-- **Paper Link**: [Please insert arXiv or official publication link here, e.g., https://arxiv.org/abs/XXXX.XXXXX]
+- **Abstract**: Model merging combines expert models for multitask performance but faces challenges from parameter interference. This has sparked recent interest in controllable model merging, giving users the ability to explicitly balance performance trade-offs. Existing approaches employ a compile-then-query paradigm, performing a costly offline multi-objective optimization to enable fast, preference-aware model generation. This offline stage typically involves iterative search or dedicated training, with complexity that grows exponentially with the number of tasks. To overcome these limitations, we shift the perspective from parameter-space optimization to a direct correction of the model's final representation. Our approach models this correction as an optimal linear transformation, yielding a closed-form solution that replaces the entire offline optimization process with a single-step, architecture-agnostic computation. This solution directly incorporates user preferences, allowing a Pareto-optimal model to be generated on-the-fly with complexity that scales linearly with the number of tasks. Experimental results show our method generates a superior Pareto front with more precise preference alignment and drastically reduced computational cost.
 - **Citation**: If you find this work helpful, please cite our paper:
   ```bibtex
   @inproceedings{
@@ -23,11 +22,7 @@ source code for paper "From Parameter to Representation: A Closed-Form Approach 
   }
   ```
 
-## Abstract and Core Contributions
-
-Model merging combines expert models for multitask performance but faces challenges from parameter interference. This has sparked recent interest in controllable model merging, giving users the ability to explicitly balance performance trade-offs. Existing approaches employ a compile-then-query paradigm, performing a costly offline multi-objective optimization to enable fast, preference-aware model generation. This offline stage typically involves iterative search or dedicated training, with complexity that grows exponentially with the number of tasks.
-
-To overcome these limitations, we propose **ReACT** (\textbf{Re}presentation \textbf{A}nalytical \textbf{C}ontrol \textbf{T}ransformation), shifting the perspective from parameter-space optimization to a direct correction of the model's final representation. Our approach models this correction as an optimal linear transformation, yielding a **closed-form solution** that replaces the entire offline optimization process with a single-step, architecture-agnostic computation. This solution directly incorporates user preferences, allowing a **Pareto-optimal model to be generated on-the-fly** with complexity that scales linearly with the number of tasks. Experimental results show our method generates a superior Pareto front with more precise preference alignment and drastically reduced computational cost.
+## Core Contributions
 
 **Our main contributions are threefold:**
 - **Paradigm Shift**: We reframe controllable merging as a representation correction problem, identifying the primary bottleneck as a simple linear distortion rather than a complex parameter conflict.
